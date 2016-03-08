@@ -35,5 +35,5 @@ else
         echo
         shift
     fi
-    GOPATH="$GOENV" exec "$@"
+    PATH="$GOENV/bin:$PATH" GOPATH="$GOENV" exec "$@"
 fi
