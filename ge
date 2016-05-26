@@ -8,15 +8,15 @@ if [ -r "$HOME/.gerc" ]; then
     source "$HOME/.gerc"
 fi
 
-if [ -z "$GOENV_DIR" ]; then
-    GOENV_DIR=".gocode"
+if [ -z "$GOENV_FILE" ]; then
+    GOENV_FILE=".goenv"
 fi
 
 DIR=`pwd`
 for (( ;; ))
 do
-    if [ -d "$DIR/$GOENV_DIR" ]; then
-        GOENV="$DIR/$GOENV_DIR"
+    if [ -e "$DIR/$GOENV_FILE" ]; then
+        GOENV="$DIR"
         break
     fi
     if [ "$DIR" == "/" ]; then
@@ -35,5 +35,5 @@ else
         echo
         shift
     fi
-    PATH="$GOENV/bin:$PATH" GOPATH="$GOENV" exec "$@"
+    PATH="$GOENV/bin:$PATH" GOPATH="$GOENV:$GOPATH" exec "$@"
 fi
